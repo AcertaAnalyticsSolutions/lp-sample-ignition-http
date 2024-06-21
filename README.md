@@ -2,7 +2,9 @@
 
 ## Background
 This example shows how to send data to LinePulse from an Ignition application using Acerta's HTTP endpoint.
-Using docker compose an Ignition and MS SQl database containers will be created and initialized.
+The following steps creates and initializes these Linux containers: 
+- Ignition ver. 8.1
+- Microsoft SQl Server database
 
 ## Requirements
 
