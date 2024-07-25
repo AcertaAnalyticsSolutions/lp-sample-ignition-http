@@ -1,15 +1,17 @@
-# LinePulse to Ignition example using HTTP endpoint
+# Ignition and MS SQL database example
 
 ## Introduction
-This example shows how to send data to LinePulse from an Ignition application using Acerta's HTTP endpoint.
-The following steps create and initializes these Linux containers: 
-- Ignition ver. 8.1.42
-- Microsoft SQl Server database 2022-CU13-ubuntu-22.04
+The intent of this project is to demonstrate how to send data to Acerta LinePulse platform using HTTP POST requests. 
+
+Inside the Ignition sample_project there is a collection of python scripts named `LinePulseAPI` that exemplifies the process of acquiring a JWT token and making a request to the ingestion endpoint. The scripts in `Simulation` are used to populate a MS SQL database with ramdon data and also mark those records after the ingestion is completed.
 
 ## Requirements
 - Docker and Docker Compose should be installed
 
 ## Deployment steps
+The following steps create and initialize these Linux containers: 
+- Ignition ver. 8.1.42
+- Microsoft SQl Server database 2022-CU13-ubuntu-22.04
 
 ### Creating secrets
 Run the following commands and follow the prompts
