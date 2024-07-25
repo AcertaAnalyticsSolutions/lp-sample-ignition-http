@@ -13,11 +13,15 @@
       "tagType": "AtomicTag"
     },
     {
-      "valueSource": "memory",
-      "dataType": "Boolean",
-      "name": "EnableIngestion",
-      "value": false,
-      "tagType": "AtomicTag"
+      "valueSource": "opc",
+      "opcItemPath": "ns\u003d1;s\u003d[Acerta_Simulator]_Meta:Realistic/Realistic7",
+      "dataType": "Float8",
+      "historyProvider": "acerta_db",
+      "name": "Signal A",
+      "historyEnabled": true,
+      "value": 23.5,
+      "tagType": "AtomicTag",
+      "opcServer": "Ignition OPC UA Server"
     },
     {
       "valueSource": "memory",
@@ -31,15 +35,11 @@
       "tagType": "Folder"
     },
     {
-      "valueSource": "opc",
-      "opcItemPath": "ns\u003d1;s\u003d[Acerta_Simulator]_Meta:Realistic/Realistic7",
-      "dataType": "Float8",
-      "historyProvider": "acerta_db",
-      "name": "Signal A",
-      "historyEnabled": true,
-      "value": 23.5,
-      "tagType": "AtomicTag",
-      "opcServer": "Ignition OPC UA Server"
+      "valueSource": "memory",
+      "dataType": "Boolean",
+      "name": "EnableIngestion",
+      "value": false,
+      "tagType": "AtomicTag"
     },
     {
       "valueSource": "db",
