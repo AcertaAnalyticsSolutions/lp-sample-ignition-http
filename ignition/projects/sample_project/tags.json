@@ -13,6 +13,13 @@
       "tagType": "AtomicTag"
     },
     {
+      "valueSource": "memory",
+      "dataType": "Boolean",
+      "name": "EnableIngestion",
+      "value": false,
+      "tagType": "AtomicTag"
+    },
+    {
       "valueSource": "opc",
       "opcItemPath": "ns\u003d1;s\u003d[Acerta_Simulator]_Meta:Realistic/Realistic7",
       "dataType": "Float8",
@@ -24,10 +31,12 @@
       "opcServer": "Ignition OPC UA Server"
     },
     {
-      "valueSource": "memory",
-      "dataType": "Boolean",
-      "name": "EnableDataSimulation",
-      "value": false,
+      "valueSource": "db",
+      "datasource": "acerta_db",
+      "query": "SELECT COUNT(*) FROM acerta_db.dbo.demo_data WHERE ingestedAt IS NULL;",
+      "name": "RecordsToIngestCount",
+      "executionMode": "FixedRate",
+      "executionRate": 5000,
       "tagType": "AtomicTag"
     },
     {
@@ -37,17 +46,8 @@
     {
       "valueSource": "memory",
       "dataType": "Boolean",
-      "name": "EnableIngestion",
+      "name": "EnableDataSimulation",
       "value": false,
-      "tagType": "AtomicTag"
-    },
-    {
-      "valueSource": "db",
-      "datasource": "acerta_db",
-      "query": "SELECT COUNT(*) FROM acerta_db.dbo.demo_data WHERE ingestedAt IS NULL;",
-      "name": "RecordsToIngestCount",
-      "executionMode": "FixedRate",
-      "executionRate": 5000,
       "tagType": "AtomicTag"
     }
   ]
