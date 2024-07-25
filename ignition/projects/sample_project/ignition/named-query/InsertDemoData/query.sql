@@ -1,0 +1,2 @@
+INSERT INTO acerta_db.dbo.demo_data(measuredAt, signalValue, signalHighLimit, signalLowLimit, modelNumber, testResult, color, size, shift, partId, station, line, signalName, recordId) 
+VALUES( :measuredAt, :value , :highLimit , :lowLimit , :modelNumber , :testResult , :color , :size , :shift , :partId , :station , :line , :signalName,  :recordId)

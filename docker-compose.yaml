@@ -8,27 +8,27 @@ services:
       - 9088:8088
       - 9043:8043
     volumes:
-      - ./ignition/data:/workdir
-      - ./ignition/backup/ignition-backup.gwbk:/restore.gwbk
+      - ./ignition/projects:/usr/local/bin/ignition/data/projects
     environment:
       - ACCEPT_IGNITION_EULA=Y
       - AUDIENCE=https://ingestion.linepulse-dev.ai # Optional environment variable
-      - CLIENT_ID_FILE=/run/secrets/client_id
-      - CLIENT_SECRET_FILE=/run/secrets/client_secret
-      - DATABASE_PASSWORD_FILE=/run/secrets/database_password
+      - CLIENT_ID_FILE=/run/secrets/client-id
+      - CLIENT_SECRET_FILE=/run/secrets/client-secret
+      - DATABASE_PASSWORD_FILE=/run/secrets/database-password
+      - DISABLE_QUICKSTART=true
       - GATEWAY_ADMIN_PASSWORD_FILE=/run/secrets/gateway-admin-password
+      - GATEWAY_MODULES_ENABLED=perspective,opc-ua,tag-historian
       - IGNITION_EDITION=standard
       - INGESTION_URL=https://ingestion.linepulse-dev.ai/v1/data_json
       - INGESTOR_UUID=53c2b619-2f98-b8ce-25fe-3b2b08fa2178
       - TOKEN_URL=https://api.linepulse-dev.ai/auth/v1/ingestion
-      - TZ=America/Toronto  # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
-    command: >
-      -r /restore.gwbk
+#    command: >
+#      -r /restore.gwbk
     restart: always
     secrets:
-      - client_id
-      - client_secret
-      - database_password
+      - client-id
+      - client-secret
+      - database-password
       - gateway-admin-password
   database:
     #image: mcr.microsoft.com/mssql/server:2022-latest
@@ -45,12 +45,12 @@ services:
       - database-data:/var/opt/mssql
 
 secrets:
-  client_id:
-    file: ./secrets/client_id
-  client_secret:
-    file: ./secrets/client_secret
-  database_password:
-    file: ./secrets/database_password
+  client-id:
+    file: ./secrets/client-id
+  client-secret:
+    file: ./secrets/client-secret
+  database-password:
+    file: ./secrets/database-password
   gateway-admin-password:
     file: ./secrets/gateway-admin-password
 

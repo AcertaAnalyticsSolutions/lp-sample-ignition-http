@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "/": {
+      "title": "Main view",
+      "viewPath": "Acerta_main"
+    }
+  },
+  "sharedDocks": {
+    "cornerPriority": "top-bottom"
+  }
+}

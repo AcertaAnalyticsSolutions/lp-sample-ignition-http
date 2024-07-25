@@ -19,6 +19,7 @@ CREATE TABLE acerta_db.dbo.demo_data (
 	station varchar(50) NULL,
 	line varchar(50) NULL,
 	ingestedAt datetime2(0) NULL,
-	signalName varchar(100) NULL
+	signalName varchar(100) NULL,
+	recordId varchar(36) NULL
 );
 GO

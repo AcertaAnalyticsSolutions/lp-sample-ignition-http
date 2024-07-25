@@ -1,0 +1,305 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 865,
+      "width": 1505
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label_3"
+        },
+        "position": {
+          "height": 86,
+          "width": 1825,
+          "x": 9,
+          "y": 3
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#000E22",
+            "color": "#D5D5D5",
+            "fontSize": 30,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "LinePulse and Ignition integration sample"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 36,
+          "rotate": {
+            "anchor": "213% 1011%"
+          },
+          "width": 57,
+          "x": 939.5,
+          "y": 411.5
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "tagPath": "[default]Signal A"
+              },
+              "transforms": [
+                {
+                  "formatType": "numeric",
+                  "formatValue": "#.##",
+                  "type": "format"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "ToggleSwitch"
+        },
+        "position": {
+          "height": 41,
+          "rotate": {
+            "anchor": "60% 50%"
+          },
+          "width": 236,
+          "x": 279.5,
+          "y": 406.5
+        },
+        "propConfig": {
+          "props.selected": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "publishInitial": false,
+                "tagPath": "[default]EnableIngestion"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "label": {
+            "text": "LinePulse ingestion"
+          }
+        },
+        "type": "ia.input.toggle-switch"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 32,
+          "rotate": {
+            "anchor": "75% 25%"
+          },
+          "width": 50,
+          "x": 744.5,
+          "y": 412.5
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "publishInitial": false,
+                "tagPath": "[default]RecordsToIngestCount"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderColor": "#473636",
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 32,
+          "width": 170,
+          "x": 574.5,
+          "y": 412.5
+        },
+        "props": {
+          "text": "Records to ingest:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "ToggleSwitch_0"
+        },
+        "position": {
+          "height": 41,
+          "rotate": {
+            "anchor": "60% 50%"
+          },
+          "width": 247,
+          "x": 8.5,
+          "y": 406
+        },
+        "propConfig": {
+          "props.selected": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "publishInitial": false,
+                "tagPath": "[default]EnableDataSimulation"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "label": {
+            "text": "Store data"
+          }
+        },
+        "type": "ia.input.toggle-switch"
+      },
+      {
+        "meta": {
+          "name": "Table"
+        },
+        "position": {
+          "height": 476,
+          "width": 1826,
+          "x": 8,
+          "y": 465
+        },
+        "propConfig": {
+          "props.data": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "publishInitial": false,
+                "tagPath": "[default]RecordsToIngest"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "type": "ia.display.table"
+      },
+      {
+        "meta": {
+          "name": "Label_2"
+        },
+        "position": {
+          "height": 32,
+          "width": 170,
+          "x": 844.5,
+          "y": 412.5
+        },
+        "props": {
+          "text": "Signal A:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TimeSeriesChart"
+        },
+        "position": {
+          "height": 300,
+          "width": 1815,
+          "x": 18,
+          "y": 99
+        },
+        "propConfig": {
+          "props.series[0].data": {
+            "binding": {
+              "config": {
+                "aggregate": "MinMax",
+                "avoidScanClassValidation": true,
+                "dateRange": {
+                  "mostRecent": "10",
+                  "mostRecentUnits": "MIN"
+                },
+                "enableValueCache": true,
+                "ignoreBadQuality": false,
+                "polling": {
+                  "enabled": false,
+                  "rate": "30"
+                },
+                "preventInterpolation": false,
+                "returnFormat": "Wide",
+                "returnSize": {
+                  "numRows": "200",
+                  "type": "FIXED"
+                },
+                "tags": [
+                  {
+                    "path": "[default]Signal A"
+                  }
+                ],
+                "valueFormat": "DATASET"
+              },
+              "type": "tag-history"
+            }
+          }
+        },
+        "props": {
+          "series": [
+            {
+              "name": "Signal A"
+            }
+          ]
+        },
+        "type": "ia.chart.timeseries"
+      },
+      {
+        "meta": {
+          "name": "Acerta-Machine-Learning-Artificial-Intelligence-Analytics-white"
+        },
+        "position": {
+          "height": 55,
+          "width": 126,
+          "x": 27,
+          "y": 18.5
+        },
+        "props": {
+          "source": "/system/images/Acerta-Machine-Learning-Artificial-Intelligence-Analytics-white.svg"
+        },
+        "type": "ia.display.image"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.coord"
+  }
+}

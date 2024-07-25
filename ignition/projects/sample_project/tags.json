@@ -1,0 +1,54 @@
+{
+  "name": "",
+  "tagType": "Provider",
+  "tags": [
+    {
+      "valueSource": "db",
+      "dataType": "DataSet",
+      "datasource": "acerta_db",
+      "query": "SELECT * FROM acerta_db.dbo.demo_data WHERE ingestedAt IS NULL;\r\n",
+      "name": "RecordsToIngest",
+      "executionMode": "FixedRate",
+      "executionRate": 5000,
+      "tagType": "AtomicTag"
+    },
+    {
+      "valueSource": "memory",
+      "dataType": "Boolean",
+      "name": "EnableIngestion",
+      "value": false,
+      "tagType": "AtomicTag"
+    },
+    {
+      "valueSource": "memory",
+      "dataType": "Boolean",
+      "name": "EnableDataSimulation",
+      "value": false,
+      "tagType": "AtomicTag"
+    },
+    {
+      "name": "_types_",
+      "tagType": "Folder"
+    },
+    {
+      "valueSource": "opc",
+      "opcItemPath": "ns\u003d1;s\u003d[Acerta_Simulator]_Meta:Realistic/Realistic7",
+      "dataType": "Float8",
+      "historyProvider": "acerta_db",
+      "name": "Signal A",
+      "historyEnabled": true,
+      "value": 23.5,
+      "tagType": "AtomicTag",
+      "opcServer": "Ignition OPC UA Server"
+    },
+    {
+      "valueSource": "db",
+      "datasource": "acerta_db",
+      "query": "SELECT COUNT(*) FROM acerta_db.dbo.demo_data WHERE ingestedAt IS NULL;",
+      "name": "RecordsToIngestCount",
+      "executionMode": "FixedRate",
+      "executionRate": 5000,
+      "tagType": "AtomicTag"
+    }
+  ]
+}
