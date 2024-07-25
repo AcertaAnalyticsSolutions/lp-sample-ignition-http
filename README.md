@@ -11,7 +11,8 @@ The following steps create and initializes these Linux containers:
 
 ## Deployment steps
 
-### Create secrets running the script
+### Creating secrets
+Run the following commands and follow the prompts
 #### Linux:
 ```
 ./create_secrets.sh
@@ -41,7 +42,7 @@ docker compose up -d
 - Once a record is succesfully ingested it will be marked in the database and will not show in the table anymore.
 
 ## Troubleshooting
-- Using the command: `docker ps` you should be able to verify if these two containers running:
+- Using the command: `docker ps` you should be able to verify if these two containers are running:
     - lp-sample-ignition-http-ignition-1
     - lp-sample-ignition-http-database-1
 - Check the container logs for errors using `docker logs {container_name}`
