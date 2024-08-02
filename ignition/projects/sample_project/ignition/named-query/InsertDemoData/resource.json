@@ -1,0 +1,106 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "acerta_db",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "16d2a6433a61c9642851eaf7e965f886ccdd3c38fe100451429f80771095a114",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-07-12T18:56:45Z"
+    },
+    "syntaxProvider": "class com.adbs.syntax.MSSQLSyntaxProvider",
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "value",
+        "sqlType": 5
+      },
+      {
+        "type": "Parameter",
+        "identifier": "testResult",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "color",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "size",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "shift",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "partId",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "station",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "line",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "signalName",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "measuredAt",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "highLimit",
+        "sqlType": 5
+      },
+      {
+        "type": "Parameter",
+        "identifier": "lowLimit",
+        "sqlType": 5
+      },
+      {
+        "type": "Parameter",
+        "identifier": "modelNumber",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "recordId",
+        "sqlType": 7
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+/ignition/projects/.resources/*
+/.vscode/*
+/ignition/projects/conversion-report.txt
+.env

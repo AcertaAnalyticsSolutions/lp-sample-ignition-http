@@ -1,0 +1,6 @@
+{
+  "title": "Acerta_Ignition_Sample",
+  "description": "Ignition sample application to demonstrate ingestion into Acerta LinePulse",
+  "enabled": true,
+  "inheritable": false
+}

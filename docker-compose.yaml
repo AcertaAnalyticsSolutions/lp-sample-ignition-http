@@ -1,0 +1,32 @@
+services:
+  ignition:
+    image: inductiveautomation/ignition:8.1.42
+    hostname: gateway
+    depends_on:
+      - database
+    ports:
+      - 9088:8088
+      - 9043:8043
+    volumes:
+      - ./ignition/projects:/usr/local/bin/ignition/data/projects
+    environment:
+      - ACCEPT_IGNITION_EULA=Y
+      - DATABASE_PASSWORD=$MSSQL_SA_PASSWORD
+      - DISABLE_QUICKSTART=true
+      - GATEWAY_MODULES_ENABLED=perspective,opc-ua,tag-historian
+      - IGNITION_EDITION=standard
+    restart: always
+  database:
+    build: ./database
+    hostname: mssql
+    environment:
+      - ACCEPT_EULA=Y 
+      - MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD
+      - TZ=America/Toronto
+    ports:
+      - 1433:1433
+    restart: always
+    volumes:
+      - database-data:/var/opt/mssql
+volumes:
+    database-data:

@@ -1,0 +1,46 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "acerta_db",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "ebfcdb9a2c34dec53ade470596b0d4af35dbcb7b2cecd4ae8ee937c0dfe4bc56",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-07-25T16:18:28Z"
+    },
+    "syntaxProvider": "class com.adbs.syntax.MSSQLSyntaxProvider",
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "ingestedAt",
+        "sqlType": 8
+      },
+      {
+        "type": "QueryString",
+        "identifier": "recordIds",
+        "sqlType": 7
+      }
+    ]
+  }
+}
