@@ -13,13 +13,6 @@
       "tagType": "AtomicTag"
     },
     {
-      "valueSource": "memory",
-      "dataType": "Boolean",
-      "name": "EnableIngestion",
-      "value": false,
-      "tagType": "AtomicTag"
-    },
-    {
       "valueSource": "opc",
       "opcItemPath": "ns\u003d1;s\u003d[Acerta_Simulator]_Meta:Realistic/Realistic7",
       "dataType": "Float8",
@@ -42,6 +35,13 @@
     {
       "name": "_types_",
       "tagType": "Folder"
+    },
+    {
+      "valueSource": "memory",
+      "dataType": "Boolean",
+      "name": "EnableIngestion",
+      "value": false,
+      "tagType": "AtomicTag"
     },
     {
       "valueSource": "memory",

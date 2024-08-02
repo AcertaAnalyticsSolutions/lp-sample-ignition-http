@@ -3,12 +3,36 @@
   "params": {},
   "props": {
     "defaultSize": {
-      "height": 865,
-      "width": 1505
+      "height": 949,
+      "width": 1962
     }
   },
   "root": {
     "children": [
+      {
+        "meta": {
+          "name": "Label_4"
+        },
+        "position": {
+          "height": 32,
+          "width": 1826,
+          "x": 7.5,
+          "y": 460
+        },
+        "props": {
+          "style": {
+            "borderColor": "#AAAAAA",
+            "borderStyle": "solid",
+            "borderWidth": 1
+          },
+          "text": "Database table [demo_data] with all the records to be ingested",
+          "textStyle": {
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
       {
         "meta": {
           "name": "Label_3"
@@ -33,45 +57,6 @@
       },
       {
         "meta": {
-          "name": "Label"
-        },
-        "position": {
-          "height": 36,
-          "rotate": {
-            "anchor": "213% 1011%"
-          },
-          "width": 57,
-          "x": 939.5,
-          "y": 411.5
-        },
-        "propConfig": {
-          "props.text": {
-            "binding": {
-              "config": {
-                "fallbackDelay": 2.5,
-                "mode": "direct",
-                "tagPath": "[default]Signal A"
-              },
-              "transforms": [
-                {
-                  "formatType": "numeric",
-                  "formatValue": "#.##",
-                  "type": "format"
-                }
-              ],
-              "type": "tag"
-            }
-          }
-        },
-        "props": {
-          "style": {
-            "textAlign": "center"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "meta": {
           "name": "ToggleSwitch"
         },
         "position": {
@@ -80,8 +65,8 @@
             "anchor": "60% 50%"
           },
           "width": 236,
-          "x": 279.5,
-          "y": 406.5
+          "x": 1084.5,
+          "y": 406
         },
         "propConfig": {
           "props.selected": {
@@ -114,8 +99,8 @@
             "anchor": "75% 25%"
           },
           "width": 50,
-          "x": 744.5,
-          "y": 412.5
+          "x": 1783.5,
+          "y": 460
         },
         "propConfig": {
           "props.text": {
@@ -146,9 +131,12 @@
         },
         "position": {
           "height": 32,
-          "width": 170,
-          "x": 574.5,
-          "y": 412.5
+          "rotate": {
+            "anchor": "158% 50%"
+          },
+          "width": 146,
+          "x": 1633.5,
+          "y": 459.5
         },
         "props": {
           "text": "Records to ingest:"
@@ -165,8 +153,8 @@
             "anchor": "60% 50%"
           },
           "width": 247,
-          "x": 8.5,
-          "y": 406
+          "x": 515.5,
+          "y": 405.5
         },
         "propConfig": {
           "props.selected": {
@@ -221,10 +209,16 @@
         "position": {
           "height": 32,
           "width": 170,
-          "x": 844.5,
-          "y": 412.5
+          "x": 836,
+          "y": 98.5
         },
         "props": {
+          "style": {
+            "backgroundColor": "#CCFFCC",
+            "borderColor": "#808080",
+            "borderStyle": "solid",
+            "borderWidth": 1
+          },
           "text": "Signal A:"
         },
         "type": "ia.display.label"
@@ -313,23 +307,38 @@
       },
       {
         "meta": {
-          "name": "Label_4"
+          "name": "Label"
         },
         "position": {
-          "height": 32,
-          "width": 1826,
-          "x": 7.5,
-          "y": 460
+          "height": 36,
+          "rotate": {
+            "anchor": "213% 1011%"
+          },
+          "width": 57,
+          "x": 935.5,
+          "y": 96
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "tagPath": "[default]Signal A"
+              },
+              "transforms": [
+                {
+                  "formatType": "numeric",
+                  "formatValue": "#.##",
+                  "type": "format"
+                }
+              ],
+              "type": "tag"
+            }
+          }
         },
         "props": {
           "style": {
-            "borderColor": "#AAAAAA",
-            "borderStyle": "solid",
-            "borderWidth": 1
-          },
-          "text": "Database table [demo_data] with all the records to be ingested",
-          "textStyle": {
-            "fontWeight": "bold",
             "textAlign": "center"
           }
         },

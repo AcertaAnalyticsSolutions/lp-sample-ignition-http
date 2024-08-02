@@ -11,27 +11,12 @@ services:
       - ./ignition/projects:/usr/local/bin/ignition/data/projects
     environment:
       - ACCEPT_IGNITION_EULA=Y
-      - AUDIENCE=https://ingestion.linepulse-dev.ai # Optional environment variable
-      - CLIENT_ID_FILE=/run/secrets/client-id
-      - CLIENT_SECRET_FILE=/run/secrets/client-secret
-      - DATABASE_PASSWORD_FILE=/run/secrets/database-password
+      - DATABASE_PASSWORD=$MSSQL_SA_PASSWORD
       - DISABLE_QUICKSTART=true
-      - GATEWAY_ADMIN_PASSWORD_FILE=/run/secrets/gateway-admin-password
       - GATEWAY_MODULES_ENABLED=perspective,opc-ua,tag-historian
       - IGNITION_EDITION=standard
-      - INGESTION_URL=https://ingestion.linepulse-dev.ai/v1/data_json
-      - INGESTOR_UUID=53c2b619-2f98-b8ce-25fe-3b2b08fa2178
-      - TOKEN_URL=https://api.linepulse-dev.ai/auth/v1/ingestion
-#    command: >
-#      -r /restore.gwbk
     restart: always
-    secrets:
-      - client-id
-      - client-secret
-      - database-password
-      - gateway-admin-password
   database:
-    #image: mcr.microsoft.com/mssql/server:2022-latest
     build: ./database
     hostname: mssql
     environment:
@@ -43,16 +28,5 @@ services:
     restart: always
     volumes:
       - database-data:/var/opt/mssql
-
-secrets:
-  client-id:
-    file: ./secrets/client-id
-  client-secret:
-    file: ./secrets/client-secret
-  database-password:
-    file: ./secrets/database-password
-  gateway-admin-password:
-    file: ./secrets/gateway-admin-password
-
 volumes:
     database-data:

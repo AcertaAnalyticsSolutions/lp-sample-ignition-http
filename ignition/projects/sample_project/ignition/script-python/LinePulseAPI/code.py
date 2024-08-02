@@ -1,63 +1,19 @@
-import os
 import sys
-import time
+import json
 
 client = system.net.httpClient()
 logger = system.util.getLogger("AcertaAPI")
 
-audience = os.environ.get('AUDIENCE','https://ingestion.linepulse.ai')
-clientId = ''
-clientSecret = ''
-databasePassword = ''
-ingestionUrl = os.environ.get('INGESTION_URL', 'https://ingestion.linepulse.ai/v1/data_json')
-ingestorUuid = os.environ.get('INGESTOR_UUID','')
-tagsFilePath = "/usr/local/bin/ignition/data/projects/sample_project/tags.json"
-token = ''
-tokenUrl = os.environ.get('TOKEN_URL', 'https://api.linepulse.ai/auth/v1/ingestion')
-
-def initializeSecrets():
-	try:
-		global clientId 
-		clientId = system.file.readFileAsString(os.environ.get('CLIENT_ID_FILE','')).strip()
-		global clientSecret 
-		clientSecret = system.file.readFileAsString(os.environ.get('CLIENT_SECRET_FILE','')).strip()
-		global databasePassword 
-		databasePassword = system.file.readFileAsString(os.environ.get('DATABASE_PASSWORD_FILE','')).strip()
-		global token
-		token = getAcertaToken()
-		#logger.debug("Secrets initialized - client: {} - secret: {} - db password: {} - token: {}".format(clientId, clientSecret, databasePassword, token))
-	except IOError:
-		logger.error("Secret files not found")
-	return
-
-def createDatabaseConnection():
-	try:
-		dbs = system.dataset.toPyDataSet(system.db.getConnections())
-		for db in dbs:
-			if db["Name"] == "acerta_db":
-				return
-		system.db.addDatasource(jdbcDriver="Microsoft SQLServer", name="acerta_db", description="Acerta sample database", 
-			connectURL="jdbc:sqlserver://database:1433", username="sa", password=databasePassword, props="databaseName=acerta_db;")
-	except:
-		logger.error("Database connection creation error: {}".format(str(sys.exc_info())))
-	return
-
-def createSimulatorDevice():
-	system.device.addDevice(deviceType = "Simulator", deviceName = "Acerta_Simulator", deviceProps = {} )
-
-def exportTags():
-	system.tag.exportTags(filePath=tagsFilePath, tagPaths=["[default]"])
-
-def importTags():
-	system.tag.importTags(filePath=tagsFilePath, basePath="[default]")
-
-def getAcertaToken():
+def getAcertaToken(audience=Initialization.AUDIENCE, client_id=Initialization.CLIENT_ID, client_secret=Initialization.CLIENT_SECRET, ingestor_uuid=Initialization.INGESTOR_UUID):
+	if (not client_id and not client_secret):
+		logger.info("No client_id or client_secret provided, running in test mode")
+		return
 	try:
 		body = {"grant_type": "client_credentials",
 				"audience": audience,
-				"client_secret": clientSecret,
-				"client_id": clientId,
-				"ingestor_uuid": ingestorUuid }
+				"client_secret": client_secret,
+				"client_id": client_id,
+				"ingestor_uuid": ingestor_uuid }
 		#logger.info("Sending token request - body: {}".format(body))
 		response = client.post(url=tokenUrl, data=body)
 		logger.info("token response: {}".format(response))
@@ -66,18 +22,25 @@ def getAcertaToken():
 			return responseBody["access_token"]
 	except:
 		logger.error("Failed to get a token - error: {}".format(str(sys.exc_info())))
+		
+		
+token = getAcertaToken()
 
-def sendLinePulseHTTPRequest(tagPath):
+
+def sendLinePulseHTTPRequest(tagPath, token=None, ingestionUrl=Initialization.INGESTION_URL):
 	records_id = []
-	
+	headers = {}
 	def callbackHTTPRequest(response, error):
 		LinePulseAPI.updateIngestedRecords(response, error, records_id)
 	
 	try:
-		data, records_id = datasetToSparkplugBJson(tagPath)
-		headers = {"Authorization":"Bearer " + token}
-		logger.info("Sending request to LinePulse - data: {}".format(data))
-		request = client.postAsync(url=ingestionUrl, params={"ingestor_uuid": ingestorUuid}, headers=headers, data=data)
+		data, records_id = datasetToIngestionRecord(tagPath)
+		if not token:
+			ingestionUrl = ingestionUrl + "test/"
+		else:
+			headers = {"Authorization": "Bearer " + token}
+		logger.info("Sending request to LinePulse - data: {} - url: {}".format(data, ingestionUrl))
+		request = client.postAsync(url=ingestionUrl + "ingestion/ingestors/" + Initialization.INGESTOR_UUID + "/record", headers=headers, data=data)
 		request.whenComplete(callbackHTTPRequest)
 		logger.info("Request sent: {}".format(str(request)))
 	except:
@@ -86,9 +49,32 @@ def sendLinePulseHTTPRequest(tagPath):
 def updateIngestedRecords(response, error, records_id):
 	if response and response.isGood():
 		logger.info("Received response from LinePulse: {} - records: {}".format(str(response), records_id))
-		Simulation.updateIngestedTimestamp(records_id)
+		Database.updateIngestedTimestamp(records_id)
 	else:
 		logger.error("Received error from LinePulse - response: {} - error: {} ".format(str(response.getText()), str(error)))
+
+def datasetToIngestionRecord(tagPath, numberOfRows=1):
+	tagName = system.tag.getConfiguration(tagPath, False)[0]['name']
+	tagValue = system.tag.readBlocking(tagPath)[0].value
+	tagDict = json.loads(system.util.jsonEncode(tagValue))
+	columns = tagValue.getColumnNames()
+	records = []
+	record_ids = []
+	for row in tagDict["rows"]:
+	    record = dict(zip(columns, row))
+	    record_ids.append(record["recordId"])
+	    records.append(record)
+	    if len(records) >= numberOfRows:
+	    	break
+	payload = {
+		"dataSources": [
+			{
+				"name": tagName,
+				"records": records
+			}
+		]
+	}
+	return payload, record_ids
 
 def datasetToSparkplugBJson(tagPath, numberOfRows=1):
 	
